@@ -11,7 +11,7 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
   - [Slash commands](#slash-commands)
   - [Worked example](#worked-example)
 - [Folder structure](#folder-structure)
-- [Deal stages](#deal-stages)
+- [Field reference](#field-reference)
 - [How specialists work](#how-specialists-work)
 - [Contributing](#contributing)
 - [Future Features](#future-features)
@@ -151,16 +151,113 @@ deed/
 
 Each specialist folder contains four files: `identity.md`, `rules.md`, `handoff.md`, and `examples.md`.
 
-## Deal stages
+## Field reference
 
-```
-qualifying → qualified → property_search → offer_pending → under_contract
-                      ↘ listing_prep ↗            → due_diligence → clear_to_close → closing → closed
-```
+### Lead object
 
-Buyers enter at `qualifying`. Sellers enter at `listing_prep`. The orchestrator owns all stage transitions — specialists never change the stage themselves.
+**`stage`** — owned exclusively by the orchestrator; specialists never write it directly.
+
+Buyer track:
+```
+qualifying → qualified → property_search → offer_pending → under_contract → due_diligence → clear_to_close → closing → closed
+```
+Seller track:
+```
+qualifying → qualified → listing_prep → active_listing → offer_received → under_contract → due_diligence → clear_to_close → closing → closed
+```
 
 Before a new lead is qualified, the orchestrator checks `client_registry.md` for a matching email or phone number. If a match is found, the returning client's history is surfaced and the existing record is reused rather than creating a duplicate.
+
+**`status`**
+
+| Value | Meaning |
+|---|---|
+| `pending_info` | Qualification incomplete — follow-up needed before the deal can progress |
+| `qualified` | All required fields present; deal is active and moving |
+| `cold` | Lead not viable — unresponsive, wrong fit, or explicitly not interested |
+
+**`intent`**
+
+| Value | Meaning |
+|---|---|
+| `buy` | Buyer lead |
+| `sell` | Seller lead |
+
+**`pre_approved`**
+
+| Value | Meaning |
+|---|---|
+| `true` | Pre-approval letter in hand |
+| `"pending"` | In process with lender, not yet complete |
+| `false` | Not yet started |
+| `null` | Not applicable (sellers) |
+
+**`contact_info.preferred_method`**
+
+| Value | Meaning |
+|---|---|
+| `email` | Prefers email contact |
+| `phone` | Prefers phone calls |
+| `text` | Prefers text messages |
+
+**`lead_source`**
+
+| Value | Meaning |
+|---|---|
+| `zillow` | Zillow inquiry |
+| `realtor_com` | Realtor.com inquiry |
+| `referral` | Referred by another client or contact |
+| `open_house` | Met at an open house |
+| `website` | Came through the team website |
+| `sign_call` | Called from a yard sign |
+| `cold_call` | Outbound cold call |
+| `repeat_client` | Has worked with the team before |
+| `other` | Any other source |
+
+**`constraints.tags`** — only confirmed-true tags are stored; never record a tag as false.
+
+| Tag | Meaning |
+|---|---|
+| `must_sell_first` | Cannot buy until their current home sells |
+| `cash_buyer` | Purchasing without a mortgage |
+| `first_time_buyer` | No prior home purchase |
+| `relocation` | Moving due to job or life change |
+| `lease_expiring` | Rental lease ending, creating urgency |
+| `investment_property` | Buying as an investment, not primary residence |
+| `1031_exchange` | Proceeds from a prior sale must be reinvested |
+| `divorce_sale` | Sale driven by divorce proceedings |
+| `estate_sale` | Sale of a deceased person's property |
+
+**`due_diligence` flags** — all must be `true` before `/close` will proceed.
+
+| Flag | Meaning when `true` |
+|---|---|
+| `inspection` | Inspection report received |
+| `appraisal` | Appraisal complete |
+| `loan_approval` | Loan formally approved by lender |
+| `title_search` | Title search clear |
+| `contingencies_released` | All contingencies released |
+
+---
+
+### Property object
+
+**`status`**
+
+| Value | Meaning |
+|---|---|
+| `active` | Under active consideration by the buyer |
+| `offer_pending` | Offer submitted, awaiting seller response |
+| `offer_rejected` | Offer was rejected |
+| `removed` | Buyer passed without making an offer |
+| `accepted` | Offer accepted; property is under contract |
+
+**`research_complete`**
+
+| Value | Meaning |
+|---|---|
+| `false` | Property research not yet run |
+| `true` | Research specialist has completed the report |
 
 ## How specialists work
 
