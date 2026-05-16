@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(New-Item -ItemType Directory -Path \"c:\\\\Users\\\\Richard\\\\Documents\\\\agency-system\\\\.claude\\\\commands\" -Force)"
+    ]
+  }
+}

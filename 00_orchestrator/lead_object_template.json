@@ -1,0 +1,39 @@
+{
+  "client_name": "",
+  "contact_info": {
+    "email": null,
+    "phone": null,
+    "preferred_method": null
+  },
+  "intent": "",
+  "status": "pending_info",
+  "stage": "qualifying",
+  "lead_source": null,
+  "referral_from": null,
+  "pre_approved": null,
+  "budget_range": {
+    "min": null,
+    "max": null
+  },
+  "asking_price_target": null,
+  "address_of_interest": null,
+  "timeline": null,
+  "location_preferences": [],
+  "constraints": {
+    "tags": [],
+    "notes": null
+  },
+  "assigned_agent": null,
+  "recommended_next_action": "",
+  "due_diligence": {
+    "inspection": false,
+    "appraisal": false,
+    "loan_approval": false,
+    "title_search": false,
+    "contingencies_released": false
+  },
+  "contract_date": null,
+  "close_date": null,
+  "created_date": "",
+  "last_updated": ""
+}

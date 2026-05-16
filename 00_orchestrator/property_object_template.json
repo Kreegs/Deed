@@ -1,0 +1,19 @@
+{
+  "address": "",
+  "mls_number": null,
+  "list_price": null,
+  "status": "active",
+  "property_details": {
+    "beds": null,
+    "baths": null,
+    "sqft": null,
+    "year_built": null,
+    "property_type": null
+  },
+  "showing_dates": [],
+  "buyer_notes": null,
+  "offer_price": null,
+  "research_complete": false,
+  "added_date": "",
+  "last_updated": ""
+}
