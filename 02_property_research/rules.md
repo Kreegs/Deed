@@ -68,7 +68,8 @@ How this property measures against the client's stated criteria:
 
 1. Set `research_complete: true` in `properties/[address_slug]/property_object.json`.
 2. Update `property_object.json` with any fields now known: `mls_number`, `list_price`, `property_details` (beds/baths/sqft/year_built/property_type).
-3. Update `contact_log.md`.
+3. If `listing_url` is present in `property_object.json`, fetch the page and extract the primary listing image URL. Save it as `main_image_url` in `property_object.json`. If no `listing_url` is set, leave `main_image_url` null.
+4. Update `contact_log.md`.
 
 ### Multiple Properties
 

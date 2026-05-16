@@ -13,6 +13,7 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 - [Deal stages](#deal-stages)
 - [How specialists work](#how-specialists-work)
 - [Contributing](#contributing)
+- [Future Features](#future-features)
 
 ## Background
 
@@ -34,7 +35,7 @@ If nothing is flagged, the response is one line: "All your open cases are curren
 |---|---|
 | `/status` | Full team briefing — all open cases across all agents, sorted by urgency |
 | `/shortlist [client]` | Buyer property comparison table across all properties in their active search |
-| `/attach-doc [client] [doc_type] [filename]` | Attaches a document from `inbox/`, sets the due diligence flag, routes to TC |
+| `/attach-doc [client] [doc_type] [filename]` | Takes a document from `inbox/`, renames it to [client name]-[report type], moves to the clients's folder, sets the due diligence flag, routes to TC |
 | `/dd-status [client]` | Due diligence snapshot — what is complete, what is at risk, days to close |
 | `/offer [client] [address] [action] [price?]` | Manages offer state: submit, accept, reject, or counter |
 | `/close [client]` | Closes a deal — verifies all DD flags, archives the folder, updates the registry |
@@ -138,3 +139,9 @@ Open `02_property_research/community_notes.md`, find the right city section (or 
 1. Copy `03_client_communication/templates/_template.md` to a new file named for the message type.
 2. Fill in the structure and any variable placeholders.
 3. Reference the new template by filename when asking the communication specialist to draft.
+
+## Future Features
+
+- **Property image extraction** — automatically pull the primary listing image from a property's listing URL during research and store it alongside the property report.
+- **Property report PDF export** — convert `property_report.md` into a fully formatted, client-ready PDF that agents can send directly without additional formatting work.
+- **GUI interface** — a graphical front end for agents who prefer not to work directly in Claude Code; would surface case status, slash commands, and client folders through a point-and-click interface.

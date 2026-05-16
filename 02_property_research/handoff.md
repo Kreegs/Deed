@@ -54,6 +54,8 @@ Sections (in order):
     "year_built":     [populated if found],
     "property_type":  [populated if found]
   },
+  "listing_url":      [preserved if already set; do not overwrite with null],
+  "main_image_url":   [primary listing image URL extracted from listing_url page, or null if listing_url was not set],
   "research_complete": true,
   "last_updated":     [today's date]
 }
