@@ -4,8 +4,10 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
 - [Background](#background)
+- [Getting Started](#getting-started)
+  - [Installation and Setup](#installation-and-setup)
+  - [Quick Start Guide](#quick-start-guide)
 - [Usage](#usage)
   - [Starting a session](#starting-a-session)
   - [Slash commands](#slash-commands)
@@ -16,21 +18,59 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 - [Contributing](#contributing)
 - [Future Features](#future-features)
 
+## Background
+
+Deed is built for real estate teams running multiple deal streams in parallel. The system replaces ad-hoc notes and verbal handoffs with a consistent file structure: every deal lives in a client folder, every action appends to a contact log, and any agent can pick up any deal by reading two files.
+
+Claude Code reads the files, runs the relevant specialist, and writes output back to the same folder. The agents interact in plain English. The system handles routing, file management, and stage tracking. Each time a specialist finishes a task they write to the contact log to keep a running history of every action taken for that customer. This provides a complete audit trail of every action taken on the deal.
+
+There is also a log of all open client cases, which is used to reference when doing a task. If you have a customer name David and you want to add an update for them, you can just say "Update David on his deal" and Claude will read the customer log and run the update specialist. There is also a seperate log of all clients, when inputing a new client, the lead qualifer agent will check this file and look to see if this client is a new or returning client. It is a safety check to ensure we are not duplicating work, and also keeps a history of all past clients.
+
+Any documenation related to the customer, the agent can copy the file into the inbox/ folder. Using the /attach-doc command, Claude will move the file to the client, rename it and update the contact log. This will ensure all the documents are with the right customer and have the same naming convention to allow for easier reference in the future.
+
+The set up is designed to be scalable to any size team, and can be adapted to any real estate market. Since the specialists only do one thing then report back to the orchestrator, it is easy to add more specialists. They the the one thing they are good at then pass back all the data they created back to the orchestrator to decide what to do next. 
+
 ## Getting Started
 
-This section is for agents joining the team for the first time. Complete these steps before your first active session.
+### Installation and Setup
+
+**Prerequisites:** [Claude Code](https://claude.ai/code) must be installed. Deed runs entirely inside Claude Code — no other software or accounts required.
+
+**Install:**
+
+1. Download or clone this repository to your local machine.
+2. Open Claude Code at the project root folder.
+3. That is all. There is nothing to configure or install beyond Claude Code itself.
+
+Every session starts the same way: open Claude Code at the project root and identify yourself. The system handles everything from there.
+
+#### Voice profiles
+
+The system drafts client emails in each agent's voice. It cannot produce any email draft without a voice profile on file — there is no generic fallback.
+
+Profiles live in `03_client_communication/voice_profiles/`. Diana, Sarah, Michael, and Rob already have profiles. To add a new agent:
+
+1. Open `03_client_communication/voice_profiles/_template.md`.
+2. Copy it to a new file named `[agent_first_name].md` in the same folder.
+3. Fill in every section — tone, openings, sign-off style, phrases you use, things you avoid, and two or three example sentences written in your voice.
+
+The more specific the profile, the more accurate the drafts. Spend 10–15 minutes on it. You only do this once per agent.
+
+#### Community notes
+
+`02_property_research/community_notes.md` is a shared, agent-maintained file of local knowledge — the street-level context about neighborhoods that won't appear in any listing. The system draws on this file when writing property reports and advising buyers on areas.
+
+To add an entry: open the file, find the right city section (or add one), add a neighborhood heading with its zip codes, and write what you know in plain English. No special format is required. Be honest and specific — this file is most useful when it reflects real agent experience, not marketing language.
+
+---
+
+### Quick Start Guide
+
+This is for agents joining the team for the first time. Complete these steps before your first active session.
 
 ### Step 1 — Set up your voice profile
 
-The system drafts emails in your voice. It will not produce any email draft without a voice profile on file. This is a hard requirement — there is no generic fallback.
-
-Your profile lives in `03_client_communication/voice_profiles/[your_name].md`. Diana, Sarah, Michael, and Rob already have profiles. If you are a new agent:
-
-1. Open `03_client_communication/voice_profiles/_template.md`.
-2. Copy it to a new file named `[your_first_name].md` in the same folder.
-3. Fill in every section — tone, openings, sign-off style, phrases you use, things you avoid, and two or three example sentences written in your voice.
-
-The more specific you are, the more accurate the drafts will be. Spend 10–15 minutes on it. You only do this once.
+See [Voice profiles](#voice-profiles) above. Your profile must exist before the system can draft any email for you.
 
 ### Step 2 — Start your first session
 
@@ -72,12 +112,6 @@ Once you have active cases, these are the commands you will use most:
 See the [Worked example](#worked-example) below for a full walkthrough of a buyer lead from intake to drafted first contact email. It covers what the system does automatically and where it pauses for your input.
 
 ---
-
-## Background
-
-Deed is built for real estate teams running multiple deal streams in parallel. The system replaces ad-hoc notes and verbal handoffs with a consistent file structure: every deal lives in a client folder, every action appends to a contact log, and any agent can pick up any deal by reading two files.
-
-Claude Code reads the files, runs the relevant specialist, and writes output back to the same folder. The agents interact in plain English. The system handles routing, file management, and stage tracking.
 
 ## Usage
 
