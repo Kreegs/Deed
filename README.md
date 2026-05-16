@@ -4,6 +4,7 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 
 ## Table of Contents
 
+- [Getting Started](#getting-started)
 - [Background](#background)
 - [Usage](#usage)
   - [Starting a session](#starting-a-session)
@@ -14,6 +15,63 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 - [How specialists work](#how-specialists-work)
 - [Contributing](#contributing)
 - [Future Features](#future-features)
+
+## Getting Started
+
+This section is for agents joining the team for the first time. Complete these steps before your first active session.
+
+### Step 1 — Set up your voice profile
+
+The system drafts emails in your voice. It will not produce any email draft without a voice profile on file. This is a hard requirement — there is no generic fallback.
+
+Your profile lives in `03_client_communication/voice_profiles/[your_name].md`. Diana, Sarah, Michael, and Rob already have profiles. If you are a new agent:
+
+1. Open `03_client_communication/voice_profiles/_template.md`.
+2. Copy it to a new file named `[your_first_name].md` in the same folder.
+3. Fill in every section — tone, openings, sign-off style, phrases you use, things you avoid, and two or three example sentences written in your voice.
+
+The more specific you are, the more accurate the drafts will be. Spend 10–15 minutes on it. You only do this once.
+
+### Step 2 — Start your first session
+
+Open Claude Code at the project root. The first thing you say should identify yourself:
+
+> "This is [your name]."
+
+The system will run your personal briefing — a filtered view of only your open cases, sorted by urgency. If you have no open cases yet, it will say so and stop.
+
+You do not need to do anything else to start. The system knows your cases, your stage, and what is due.
+
+### Step 3 — Add your first lead
+
+When a new lead comes in, just describe them in plain English:
+
+> "I just got a new lead — [name], buyer, looking in [area], budget around $[X]. Their email is [email]."
+
+The system will create the client folder, fill in everything it can from your message, and ask for anything missing. From that point, it routes automatically.
+
+For sellers, the same approach works:
+
+> "New seller lead — [name], wants to list their home at [address]. They're thinking $[price]."
+
+### Step 4 — Learn the commands
+
+Once you have active cases, these are the commands you will use most:
+
+| Command | When to use it |
+|---|---|
+| `/status` | Morning briefing — full team view of every open case |
+| `/shortlist [client]` | Before a showing — comparison of all properties a buyer is tracking |
+| `/attach-doc [client] [doc_type] [filename]` | When a document arrives — drop it in `inbox/` first, then run this |
+| `/dd-status [client]` | After going under contract — tracks every due diligence item and deadline |
+| `/offer [client] [address] [action] [price?]` | To submit, accept, reject, or counter an offer |
+| `/close [client]` | When a deal is done — runs the closing checklist and archives the file |
+
+### Step 5 — Follow a deal through (worked example)
+
+See the [Worked example](#worked-example) below for a full walkthrough of a buyer lead from intake to drafted first contact email. It covers what the system does automatically and where it pauses for your input.
+
+---
 
 ## Background
 
