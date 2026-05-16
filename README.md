@@ -153,7 +153,7 @@ Each specialist folder contains four files: `identity.md`, `rules.md`, `handoff.
 
 ## Field reference
 
-The program uses 2 .json files. One to track the client and the status of the sale/purchase. The other handles all the information about the property. 
+The program uses 2 .json files. One to track the client and the status of the sale/purchase. The other handles all the information about the property. The field reference below are for context and understanding the flow of the program. 
 
 ### Lead object
 
