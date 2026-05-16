@@ -9,7 +9,6 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
   - [Installation and Setup](#installation-and-setup)
   - [Quick Start Guide](#quick-start-guide)
 - [Usage](#usage)
-  - [Starting a session](#starting-a-session)
   - [Slash commands](#slash-commands)
   - [Worked example](#worked-example)
 - [Folder structure](#folder-structure)
@@ -96,16 +95,7 @@ For sellers, the same approach works:
 
 ### Step 4 — Learn the commands
 
-Once you have active cases, these are the commands you will use most:
-
-| Command | When to use it |
-|---|---|
-| `/status` | Morning briefing — full team view of every open case |
-| `/shortlist [client]` | Before a showing — comparison of all properties a buyer is tracking |
-| `/attach-doc [client] [doc_type] [filename]` | When a document arrives — drop it in `inbox/` first, then run this |
-| `/dd-status [client]` | After going under contract — tracks every due diligence item and deadline |
-| `/offer [client] [address] [action] [price?]` | To submit, accept, reject, or counter an offer |
-| `/close [client]` | When a deal is done — runs the closing checklist and archives the file |
+Once you have active cases, these are the slash commands you will use most. These commands will help you handle more complex tasks easily. [Learn more here.](#slash-commands)
 
 ### Step 5 — Follow a deal through (worked example)
 
@@ -114,12 +104,6 @@ See the [Worked example](#worked-example) below for a full walkthrough of a buye
 ---
 
 ## Usage
-
-### Starting a session
-
-Open Claude Code at the project root. The system identifies which agent the session is for, then runs a personal briefing filtered to that agent's open cases. The briefing surfaces anything urgent or overdue.
-
-If nothing is flagged, the response is one line: "All your open cases are current."
 
 ### Slash commands
 
@@ -130,7 +114,7 @@ If nothing is flagged, the response is one line: "All your open cases are curren
 | `/attach-doc [client] [doc_type] [filename]` | Takes a document from `inbox/`, renames it to [client name]-[report type], moves to the clients's folder, sets the due diligence flag, routes to TC |
 | `/dd-status [client]` | Due diligence snapshot — what is complete, what is at risk, days to close |
 | `/offer [client] [address] [action] [price?]` | Manages offer state: submit, accept, reject, or counter |
-| `/close [client]` | Closes a deal — verifies all DD flags, archives the folder, updates the registry |
+| `/close [client]` | Closes a deal — verifies all Due Dillegence steps are completed, archives the folder, updates the registry |
 
 For `/attach-doc`: drop the file into `inbox/` first, then run the command with the filename.
 
@@ -250,7 +234,7 @@ Before a new lead is qualified, the orchestrator checks `client_registry.md` for
 | `repeat_client` | Has worked with the team before |
 | `other` | Any other source |
 
-**`constraints.tags`** — only confirmed-true tags are stored; never record a tag as false.
+**`constraints.tags`** — only confirmed-true tags are stored; never record a tag as false. The agent can also add new tags that are specific to the client or deal and not limited to just this list. These are just the most common ones.
 
 | Tag | Meaning |
 |---|---|
@@ -315,11 +299,7 @@ Key rules:
 
 ### Adding a new agent
 
-1. Copy `03_client_communication/voice_profiles/_template.md` to `[agent_name].md` in the same folder.
-2. Fill in the voice profile — tone, signature phrases, what to avoid, sample sentences.
-3. The new agent can start taking sessions immediately.
-
-No other configuration needed.
+See [Voice profiles](#voice-profiles) in the Installation and Setup section for instructions. No other configuration is needed — once the profile exists, the agent can start taking sessions immediately.
 
 ### Adding community knowledge
 
