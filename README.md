@@ -19,7 +19,7 @@ A file-based AI operating system for a real estate team. Handles lead intake, pr
 
 ## Background
 
-Deed is built for real estate teams running multiple deal streams in parallel. The system replaces ad-hoc notes and verbal handoffs with a consistent file structure: every deal lives in a client folder, every action appends to a contact log, and any agent can pick up any deal by reading two files.
+Deed is built for real estate teams running multiple deal streams in parallel. The system replaces ad-hoc notes and verbal handoffs with a consistent file structure: every deal lives in a client folder, every action appends to a contact log, and any agent can pick up any deal by reading two files. It uses natural language and context awareness, so you could switch clients and not have it get confused about whose deal you are working on. It also has memory of every interaction it has ever had with the client, so it can pick up where it left off.
 
 Claude Code reads the files, runs the relevant specialist, and writes output back to the same folder. The agents interact in plain English. The system handles routing, file management, and stage tracking. Each time a specialist finishes a task they write to the contact log to keep a running history of every action taken for that customer. This provides a complete audit trail of every action taken on the deal.
 
